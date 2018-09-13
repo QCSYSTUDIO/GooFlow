@@ -1,6 +1,6 @@
 # GooFlow
 
-一个基于 Jquery/FontAwesome 的流程图/架构图画图插件  
+一个基于 Jquery/FontAwesome 的流程图/架构图画图插件 、展示控件 fork 自https://github.com/huangjunsen/GooFlow 进行了一定的优化和调整。
 
 ### 版本
 V1.0  
@@ -64,4 +64,6 @@ var demo1 = $('#demo1').createGooFlow(options);
   
 ### 5. 二次开发示例：画架构图
 ![](https://github.com/huangjunse/GooFlow/raw/master/SnapShot/02_redevelop.jpg)  
+![](http://htmlpreview.github.io/?https://github.com/QCSYSTUDIO/GooFlow/blob/master/demo.html)  
+
   
