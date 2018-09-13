@@ -47,6 +47,7 @@ var demo1 = $('#demo1').createGooFlow(options);
 
   
 ### 3. 操作手册(API)：
+如果无法打开网页，请下载项目查看demo.html
 http://htmlpreview.github.io/?https://github.com/QCSYSTUDIO/GooFlow/blob/master/demo.html
 
   
