@@ -25,6 +25,8 @@
 *                  2. 将 createGooFlow 注册成为 jq 插件
 *                  3. 修改部分内容，将回调函数的注册方法放入 property 中，修复bug。（已同步）
 *                  4. 定义定制化版本为 V1.0
+ * 2018-09-13--qcsy-1、修复:标线的时候线不能标记bug
+ *                  2、优化:添加了标线颜色参数,使得标线的时候不仅仅是红色 (V1.0->V1.0.0.1)
 * 
 */
 
@@ -1642,31 +1644,42 @@ GooFlow.prototype={
         if(this.$focus==id) this.$focus="";
         --this.$lineCount;
     },
-    //用颜色标注/取消标注一个结点或转换线, 常用于显示重点或流程的进度。
-    //这是一个在编辑模式中无用,但是在纯浏览模式中非常有用的方法, 实际运用中可用于跟踪流程的进度。
-    markItem:function(id,type,mark){
+    /**
+     * 用颜色标注/取消标注一个结点或转换线, 常用于显示重点或流程的进度。
+     * 这是一个在编辑模式中无用,但是在纯浏览模式中非常有用的方法, 实际运用中可用于跟踪流程的进度。
+     * @param id 元素id
+     * @param type 类型 "line"、"node"、"area"
+     * @param mark true标记  false取消标记
+     * @param color 指定颜色
+     */
+    markItem:function(id,type,mark,color){
+        if(null==color){
+            color="#ff3300";
+        }
         if(type=="node"){
             if(!this.$nodeData[id]) return;
             if(this.onItemMark!=null&&!this.onItemMark(id,"node",mark)) return;
             this.$nodeData[id].marked=mark||false;
-            if(mark)    this.$nodeDom[id].addClass("item_mark");
+            if(mark)  {
+                this.$nodeDom[id].css("background",color);
+                this.$nodeDom[id].css("border",color+" 1px solid");
+            }
             else    this.$nodeDom[id].removeClass("item_mark");
-            
         }else if(type=="line"){
             if(!this.$lineData[id]) return;
             if(this.onItemMark!=null&&!this.onItemMark(id,"line",mark)) return;
             this.$lineData[id].marked=mark||false;
             if(GooFlow.prototype.useSVG!=""){
                 if(mark){
-                    this.$nodeDom[id].childNodes[1].setAttribute("stroke","#ff3300");
-                    this.$nodeDom[id].childNodes[1].setAttribute("marker-end","url(#arrow2)");
+                    this.$lineDom[id].childNodes[1].setAttribute("stroke",color);
+                    this.$lineDom[id].childNodes[1].removeAttribute("marker-end");
                 }else{
-                    this.$nodeDom[id].childNodes[1].setAttribute("stroke","#5068AE");
-                    this.$nodeDom[id].childNodes[1].setAttribute("marker-end","url(#arrow1)");
+                    this.$lineDom[id].childNodes[1].setAttribute("stroke","#5068AE");
+                    this.$lineDom[id].childNodes[1].setAttribute("marker-end","url(#arrow1)");
                 }
             }else{
-                if(mark)    this.$nodeDom[id].strokeColor="#ff3300";
-                else    this.$nodeDom[id].strokeColor="#5068AE"
+                if(mark)   this.$lineDom[id].strokeColor=color;
+                else    this.$lineDom[id].strokeColor="#5068AE"
             }
         }
         if(this.$undoStatck){
