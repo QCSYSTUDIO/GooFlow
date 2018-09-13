@@ -49,21 +49,7 @@ var demo1 = $('#demo1').createGooFlow(options);
 ```
 
   
-### 3. 参数(options)：
-![](https://github.com/huangjunse/GooFlow/raw/master/SnapShot/03_option1.jpg)  
-![](https://github.com/huangjunse/GooFlow/raw/master/SnapShot/03_option2.jpg)  
-![](https://github.com/huangjunse/GooFlow/raw/master/SnapShot/03_option3.jpg)  
-![](https://github.com/huangjunse/GooFlow/raw/master/SnapShot/03_option4.jpg)  
-![](https://github.com/huangjunse/GooFlow/raw/master/SnapShot/03_option5.jpg)  
-
-  
-### 4. 方法：
-提供了多达36个方法，专门为进行二次开发而使用。  
-更多内容参见demo.html
-
-  
-### 5. 二次开发示例：画架构图
-![](https://github.com/huangjunse/GooFlow/raw/master/SnapShot/02_redevelop.jpg)  
-![](http://htmlpreview.github.io/?https://github.com/QCSYSTUDIO/GooFlow/blob/master/demo.html)  
+### 3. 操作手册(API)：
+http://htmlpreview.github.io/?https://github.com/QCSYSTUDIO/GooFlow/blob/master/demo.html
 
   
