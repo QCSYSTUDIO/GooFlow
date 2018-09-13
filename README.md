@@ -8,10 +8,10 @@ V1.0.0.1
 
 ### 更新日志
 * 2018-09-13 (V1.0->V1.0.0.1)
-    修复:标线的时候线不能标记bug 
-    优化:添加了标线颜色参数,使得标线的时候不仅仅是红色。
-         添加了展示模式配置 showmodel
-         添加了背景取消参数、工作区边框取消参数
+    修复:标线的时候线不能标记bug  
+    优化:添加了标线颜色参数,使得标线的时候不仅仅是红色。  
+         添加了展示模式配置 showmodel  
+         添加了背景取消参数、工作区边框取消参数  
 
 ### 依赖
 * jquery1.11+  
@@ -52,7 +52,9 @@ var demo1 = $('#demo1').createGooFlow(options);
   
 ### 3. 操作手册(API)：
 如果无法打开网页，请下载项目查看demo.html 及api.html
-
+* 查看API  
 http://htmlpreview.github.io/?https://github.com/QCSYSTUDIO/GooFlow/blob/master/api.html
+* 查看demo  
+http://htmlpreview.github.io/?https://github.com/QCSYSTUDIO/GooFlow/blob/master/demo.html
 
   
