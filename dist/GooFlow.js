@@ -70,10 +70,23 @@ function GooFlow(bgDiv,property){
         console.log('Error! 若id参数没有给出, 则容器必须提供id属性!');
         return false;
     }
+    //如果是纯展示模式
+    if(property.showModel){
+        property.haveHead=false;
+        property.haveTool=false;
+        property.haveBackGround=false;
+        property.haveWorkAreaBorder=false;
+        property.editable=false;
+    }
+
     //初始化区域图的对象
     this.$id = eleName;    // 这个表示画布里面元素的命名的第一部分(eleName_node_int)
     this.$bgDiv = bgDiv;
     this.$bgDiv.addClass("GooFlow");
+    //是否需要背景
+    if(property.haveBackGround){
+        this.$bgDiv.addClass("GooFlow_background");
+    }
     this.$tool = null;    // 左侧工具栏对象
     this.$head = null;    // 顶部标签及工具栏按钮
     this.$title = null;   // 流程图的名称
@@ -200,8 +213,19 @@ function GooFlow(bgDiv,property){
         workWidth = width - 17;
     if(!workHeight)
         workHeight = height - (property.haveHead? 20:17);
-    this.$bgDiv.append("<div class='GooFlow_work' style='width:"+(width)+"px;height:"+(height)+"px;"+(property.haveHead? "":"margin-top:3px")+"'></div>");
-    this.$workArea=$("<div class='GooFlow_work_inner' style='width:"+workWidth+"px;height:"+workHeight+"px'></div>")
+    //操作区是否要边框
+    var workAreaCss="GooFlow_work";
+    debugger;
+    if(property.haveWorkAreaBorder){
+        workAreaCss+=" GooFlow_work_border";
+    }
+    this.$bgDiv.append("<div class='"+workAreaCss+"' style='width:"+(width)+"px;height:"+(height)+"px;"+(property.haveHead? "":"margin-top:3px")+"'></div>");
+    //操作区是否需要背景
+    var workInnerCss="";
+    if(property.haveBackGround){
+        workInnerCss="class='GooFlow_work_inner'";
+    }
+    this.$workArea=$("<div "+workInnerCss+"  style='width:"+workWidth+"px;height:"+workHeight+"px'></div>")
         .attr({"unselectable":"on","onselectstart":'return false',"onselect":'document.selection.empty()'});
     this.$bgDiv.children(".GooFlow_work").append(this.$workArea);
     this.$draw=null;//画矢量线条的容器
@@ -1785,6 +1809,8 @@ $.fn.extend({
             width: 'auto',    // 此两个变量定义整个控件的宽高（含工具栏、滚动条）, 
             height: 500,   // 如忽略, 则默认宽度=容器宽度
             initNum: 1,    // 元素起始 编码
+            //是否展示模式  如果是展示模式的话，那么整个展示区将背景透明，操作区没有边框，没有工具栏和保存栏，不能编辑。所有对应设置都不起效
+            showModel:false,
             initLabelText: 'newFlow_1',
             workWidth: null,    // 此两个变量定义画布的宽高, 如忽略, 则这两个变量根据 width 和 height 自动计算。
             workHeight: null,   // 目的是不产生拖动/滚动条, 刚好适配宽高
@@ -1799,6 +1825,10 @@ $.fn.extend({
             haveGroup: true,     //是否启用如为否, 则左侧工具栏的 group 工具将不展现, 但是已经画了的“组织划分框”还是会出现的。
             useOperStack: true,  //是否启用回滚栈, 如否, 头部工具栏的回滚和重做按钮都将失效
             editable: true,      //是否可编辑, 仅在 haveTool=false 时有意义
+            //操作区域是否有背景，若无则透明 默认有背景
+            haveBackGround:true,
+            //操作区是否需要边框
+            haveWorkAreaBorder:true,
             // 工具栏回调函数：
             onBtnNewClick: null,     // 新建流程图按钮被点中
             onBtnOpenClick: null,    // 打开流程图按钮定义
@@ -1834,8 +1864,9 @@ $.fn.extend({
             onLineSetType: null,
             //当用重色标注某个结点/转换线时触发的方法, 返回FALSE可阻止重定大小/造型事件的发生
             //格式function(id, type, mark)：id是单元的唯一标识ID,type是单元类型（"node"结点,"line"转换线）, mark为布尔值,表示是要标注TRUE还是取消标注FALSE
-            onItemMark: null,
+            onItemMark: null
         },options;
+        debugger;
         options = $.extend({}, defaultOption, property);
         return new GooFlow(this, options);
     }

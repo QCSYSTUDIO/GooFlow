@@ -6,13 +6,15 @@
 */
 
 .GooFlow{
-    background:#D2E1F0;
-    border:#99BBE8 1px solid;
     font: 12px Arial, Helvetica, sans-serif;
     -moz-user-select:none;
     -webkit-user-select:none;
     -ms-user-select:none;
     -o-user-select:none;
+}
+.GooFlow_background{
+    background:#D2E1F0;
+    border:#99BBE8 1px solid;
 }
 .GooFlow i{
     font-size: 1.33em;
@@ -120,10 +122,13 @@
 .GooFlow_work {
     float: right;
     margin: 0px 3px 3px 0px;
-    border: #99B1CE 1px solid;
     position: relative;
-    overflow: scroll
+    overflow: auto;
 }
+.GooFlow_work_border{
+    border: #99B1CE 1px solid;
+}
+
 .GooFlow_work .GooFlow_work_inner {
     background-color: #D3D3D3;
     background-image: -webkit-linear-gradient(45deg, #DDD 25%, transparent 25%, transparent 75%, #DDD 75%, #DDD),
