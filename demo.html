@@ -578,14 +578,15 @@
                         </tr>
                         <tr>
                             <td>markItem</td>
-                            <td><pre><code>demo.markItem(id, type, mark);</code></pre></td>
+                            <td><pre><code>demo.markItem(id, type, mark,color);</code></pre></td>
                             <td>
                                 用颜色标注/取消标注一个结点或转换线, 常用于显示重点或流程的进度<br>
                                 这是一个在编辑模式中无用,但是在纯浏览模式中非常有用的方法, <br>
                                 实际运用中可用于跟踪流程的进度。<br>
                                 id: string 表示连接线的唯一标识ID<br>
                                 type: string ['node'/'line'/'area'] 需要与该元素类型匹配才能标注元素<br>
-                                mark: bool 是否显示提示文本
+                                mark: bool 是否显示提示文本<br>
+                                color:标线颜色 如"red" 、"#DDD"
                             </td>
                         </tr>
                         <tr class="tr-disable">
