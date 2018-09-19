@@ -504,9 +504,11 @@ GooFlow.prototype={
         var tmpClk=null;
         if(GooFlow.prototype.useSVG!="")  tmpClk="g";
         else  tmpClk="PolyLine";
-        $(this.$draw).delegate(tmpClk,"click",{inthis:this},function(e){
-            e.data.inthis.focusItem(this.id,true);
-        });
+        if(this.$editable){
+            $(this.$draw).delegate(tmpClk,"click",{inthis:this},function(e){
+                e.data.inthis.focusItem(this.id,true);
+            });
+        }
         if(this.$editable)
         $(this.$draw).delegate(tmpClk,"dblclick",{inthis:this},function(e){
             var oldTxt,x,y,from,to;
@@ -1866,7 +1868,7 @@ $.fn.extend({
             //格式function(id, type, mark)：id是单元的唯一标识ID,type是单元类型（"node"结点,"line"转换线）, mark为布尔值,表示是要标注TRUE还是取消标注FALSE
             onItemMark: null
         },options;
-        debugger;
+        
         options = $.extend({}, defaultOption, property);
         return new GooFlow(this, options);
     }
